@@ -1,0 +1,46 @@
+services:
+
+ mongodb:
+
+   image: mongo:7
+
+   container_name: mongodb
+
+   ports:
+     - "27017:27017"
+
+   volumes:
+     - mongodb-data:/data/db
+
+ catalog-service:
+
+   build:
+     context: ./services/catalog-service
+
+   container_name: catalog-service
+
+   ports:
+     - "3000:3000"
+
+   environment:
+     - MONGO_URL=mongodb://mongodb:27017/smartretail
+
+   depends_on:
+     - mongodb
+
+ frontend:
+
+   build:
+     context: ./frontend
+
+   container_name: frontend
+
+   ports:
+     - "8080:80"
+
+   depends_on:
+     - catalog-service
+
+volumes:
+
+ mongodb-data:

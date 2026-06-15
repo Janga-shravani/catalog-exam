@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Smart Retail Platform</title>
+</head>
+
+<body>
+
+   <h1>Smart Retail Commerce Platform</h1>
+
+   <button onclick="loadProducts()">
+       Load Products
+   </button>
+
+   <ul id="productList"></ul>
+
+   <script>
+
+       async function loadProducts() {
+
+           const response = await fetch("http://54.185.148.106:3000/products");
+
+           const products = await response.json();
+
+           const list = document.getElementById("productList");
+
+           list.innerHTML = "";
+
+           products.forEach(product => {
+
+               const item = document.createElement("li");
+
+               item.innerText =
+                   product.name +
+                   " | " +
+                   product.category +
+                   " | $" +
+                   product.price;
+
+               list.appendChild(item);
+
+           });
+
+       }
+
+   </script>
+
+</body>
+
+</html>

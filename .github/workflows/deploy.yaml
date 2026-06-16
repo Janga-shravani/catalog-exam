@@ -19,15 +19,17 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v3
 
-    # 2. Login to Azure
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Login ACR
 
-    # 3. Login to ACR
-    - name: ACR Login
-      run: az acr login --name $ACR_NAME
+     uses: docker/login-action@v3
+
+     with:
+
+       registry: ${{ secrets.ACR_LOGIN_SERVER }}
+
+       username: ${{ secrets.ACR_USERNAME }}
+
+       password: ${{ secrets.ACR_PASSWORD }}
 
     # 4. Build & Push Catalog Service
     - name: Build Catalog Image

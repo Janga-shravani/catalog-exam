@@ -64,7 +64,6 @@ jobs:
 
        kubectl set image deployment/catalog-deployment \
        catalog=${{ secrets.ACR_LOGIN_SERVER }}/catalog-service:${{ github.run_number }} \
-       -n smart-retail
        
    - name: Build Frontend
 

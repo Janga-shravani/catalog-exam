@@ -19,7 +19,7 @@ app.get("/", async (req, res) => {
        let html = `
        <html>
        <head>
-           <title>Smart Retail Platform</title>
+           <title>Smart Retail Platform test version exam</title>
        </head>
        <body>
            <h1>Smart Retail Commerce Platform</h1>

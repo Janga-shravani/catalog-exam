@@ -34,14 +34,14 @@ jobs:
     # 4. Build & Push Catalog Service
     - name: Build Catalog Image
       run: |
-        docker build -t $ACR_NAME.azurecr.io/catalog-service:${{ github.sha }} .services/catalog-service
-        docker push $ACR_NAME.azurecr.io/catalog-service:${{ github.sha }}
+        docker build -t ${{ secrets.ACR_LOGIN_SERVER }}.azurecr.io/catalog-service:${{ github.sha }} .services/catalog-service
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}.azurecr.io/catalog-service:${{ github.sha }}
 
     # 5. Build & Push Frontend
     - name: Build Frontend Image
       run: |
-        docker build -t $ACR_NAME.azurecr.io/frontend:${{ github.sha }} ./frontend
-        docker push $ACR_NAME.azurecr.io/frontend:${{ github.sha }}
+        docker build -t ${{ secrets.ACR_LOGIN_SERVER }}.azurecr.io/frontend:${{ github.sha }} ./frontend
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}.azurecr.io/frontend:${{ github.sha }}
 
     # 6. Get AKS credentials
     - name: Get AKS Credentials
@@ -55,10 +55,10 @@ jobs:
     - name: Deploy to AKS
       run: |
         kubectl set image deployment/catalog-service \
-          catalog-service=$ACR_NAME.azurecr.io/catalog-service:${{ github.sha }} \
+          catalog-service=${{ secrets.ACR_LOGIN_SERVER }}.azurecr.io/catalog-service:${{ github.sha }} \
 
         kubectl set image deployment/frontend \
-          frontend=$ACR_NAME.azurecr.io/frontend:${{ github.sha }} \
+          frontend=${{ secrets.ACR_LOGIN_SERVER }}.azurecr.io/frontend:${{ github.sha }} \
 
     # 8. Verify rollout
     - name: Check Rollout

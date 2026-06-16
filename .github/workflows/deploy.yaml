@@ -62,7 +62,7 @@ jobs:
 
      run: |
 
-       kubectl set image deployment/catalog-deployment \
+       kubectl set image deployment/catalog-service \
        catalog=${{ secrets.ACR_LOGIN_SERVER }}/catalog-service:${{ github.run_number }} \
        
    - name: Build Frontend

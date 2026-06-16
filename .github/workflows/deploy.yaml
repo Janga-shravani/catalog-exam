@@ -34,7 +34,7 @@ jobs:
     # 4. Build & Push Catalog Service
     - name: Build Catalog Image
       run: |
-        docker build -t $ACR_NAME.azurecr.io/catalog-service:${{ github.sha }} ./catalog-service
+        docker build -t $ACR_NAME.azurecr.io/catalog-service:${{ github.sha }} .services/catalog-service
         docker push $ACR_NAME.azurecr.io/catalog-service:${{ github.sha }}
 
     # 5. Build & Push Frontend
